@@ -1,0 +1,10 @@
+language: swift
+osx_image: xcode9.4
+branches:
+  only:
+    - master
+before_install:
+  - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
+  - pod repo update  
+script:
+  - cd Demo && make

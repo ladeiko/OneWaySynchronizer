@@ -16,6 +16,7 @@ typealias PreviewCompletion = (_ error: Error?, _ image: UIImage?) -> Void
 
 fileprivate struct RemoteItemDescription: OneWaySynchronizerItemDescription {
     var owsPrimaryKey: OneWaySynchronizerItemKey
+    var owsDownloadOrder: OneWaySynchronizerItemDownloadOrder
     var order: Int
     var title: String
     var url: String
@@ -76,7 +77,7 @@ class MyService: OneWaySynchronizerProcessor {
         
         // NOTE: Method can be called not in main thread!
         
-        completion() // No matter what thread is now running on!
+        completion() // Completion can be called from any thread!
     }
     
     func owsSyncEnd(_ completion: @escaping OwsCompletion) {
@@ -87,7 +88,7 @@ class MyService: OneWaySynchronizerProcessor {
             
             self._items.sort()
             
-            completion() // No matter what thread is now running on!
+            completion() // Completion can be called from any thread!
         }
     }
     
@@ -102,6 +103,7 @@ class MyService: OneWaySynchronizerProcessor {
             if let json = response.result.value {
                 for (i, item) in (json as! [Dictionary<String,Any>]).enumerated() {
                     items.append(RemoteItemDescription(owsPrimaryKey: String(item["id"] as! Int),
+                                                       owsDownloadOrder: 0,
                                                        order: i,
                                                        title: item["login"] as! String,
                                                        url: item["avatar_url"] as! String))
@@ -180,9 +182,14 @@ class MyService: OneWaySynchronizerProcessor {
             
             completion(nil) // No matter what thread is now running on!
         }
-        
 
     }
+    
+    func owsPrepareDownload(of descriptions: [OneWaySynchronizerItemDescription], completion: @escaping OwsItemsCompletion) {
+        completion(nil, descriptions)
+    }
+    
+    // MARK: Public
     
     func count() -> Int {
         return _items.count

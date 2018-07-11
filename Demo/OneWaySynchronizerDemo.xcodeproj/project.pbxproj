@@ -40,6 +40,8 @@
 		1246EBD420F4D8A6008F3352 /* OneWaySynchronizerDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneWaySynchronizerDemoTests.swift; sourceTree = "<group>"; };
 		1246EBD620F4D8A6008F3352 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1246EBDF20F4D900008F3352 /* MyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyService.swift; sourceTree = "<group>"; };
+		129DEBC320F60F2400B23035 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
+		129DEBC420F60F2400B23035 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		560D357930ECF0DBA262F9BB /* Pods-OneWaySynchronizerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneWaySynchronizerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-OneWaySynchronizerDemo/Pods-OneWaySynchronizerDemo.release.xcconfig"; sourceTree = "<group>"; };
 		764034DE1CC28CB89E84D4E3 /* Pods_OneWaySynchronizerDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneWaySynchronizerDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81F2DF9B2667791791120E40 /* Pods-OneWaySynchronizerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneWaySynchronizerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneWaySynchronizerDemo/Pods-OneWaySynchronizerDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -71,6 +73,8 @@
 		1246EBB320F4D8A5008F3352 = {
 			isa = PBXGroup;
 			children = (
+				129DEBC320F60F2400B23035 /* CHANGELOG.md */,
+				129DEBC420F60F2400B23035 /* README.md */,
 				1246EBBE20F4D8A5008F3352 /* OneWaySynchronizerDemo */,
 				1246EBD320F4D8A6008F3352 /* OneWaySynchronizerDemoTests */,
 				1246EBBD20F4D8A5008F3352 /* Products */,
@@ -139,6 +143,8 @@
 			buildConfigurationList = 1246EBD920F4D8A6008F3352 /* Build configuration list for PBXNativeTarget "OneWaySynchronizerDemo" */;
 			buildPhases = (
 				19CD3573778FFB652BE5F783 /* [CP] Check Pods Manifest.lock */,
+				129DEBC220F60E5900B23035 /* [CUSTOM] Format */,
+				129DEBC120F606C800B23035 /* [CUSTOM] Linting */,
 				1246EBB820F4D8A5008F3352 /* Sources */,
 				1246EBB920F4D8A5008F3352 /* Frameworks */,
 				1246EBBA20F4D8A5008F3352 /* Resources */,
@@ -234,6 +240,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		129DEBC120F606C800B23035 /* [CUSTOM] Linting */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CUSTOM] Linting";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$TRAVIS\" != \"true\" ]; then\n    if which swiftlint >/dev/null; then\n        cd ../Source && swiftlint --config ../Demo/swiftlint.yml\n    else\n        echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    fi\nfi";
+		};
+		129DEBC220F60E5900B23035 /* [CUSTOM] Format */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CUSTOM] Format";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$TRAVIS\" != \"true\" ]; then\n    if which swiftformat >/dev/null; then\n        cd ../Source && swiftformat .\n    else\n        echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\n    fi\nfi";
+		};
 		19CD3573778FFB652BE5F783 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
