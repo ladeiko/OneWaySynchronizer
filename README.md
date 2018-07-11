@@ -62,12 +62,12 @@ For detailed example see [Demo](Demo) folder.
   ├─< err     ok
   │           ↓
   │ [download preview of item if necessary]
-  │  owsDownloadItemPreview <────────────────────────────┐
+  │  owsDownloadItemPreview <───────────────────────────┐
   │   ↓       ↓                                         │
   ├─< err     ok >── concurrent loop for all previews ──┘
   │           ↓
   │ [download main content of item if necessary]
-  │  owsDownloadItem <──────────────────────────────────┐
+  │  owsDownloadItem <─────────────────────────────────┐
   │   ↓       ↓                                        │
   ├─< err     ok >── concurrent loop for all previews ─┘
   │           ↓
