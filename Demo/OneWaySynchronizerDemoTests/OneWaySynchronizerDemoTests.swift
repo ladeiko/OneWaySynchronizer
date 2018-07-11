@@ -9,6 +9,8 @@
 import XCTest
 import OneWaySynchronizer
 
+let waitTimeout: TimeInterval = 100
+
 @testable import OneWaySynchronizerDemo
 
 enum TestError: Error {
@@ -212,8 +214,8 @@ class OneWaySynchronizerDemoTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 10)
-        wait(for: [startExpectation, endExpectation], timeout: 10)
+        wait(for: [expectation], timeout: waitTimeout)
+        wait(for: [startExpectation, endExpectation], timeout: waitTimeout)
         
         NotificationCenter.default.removeObserver(localObserver)
         
@@ -245,7 +247,7 @@ class OneWaySynchronizerDemoTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: waitTimeout)
         XCTAssert(failed == nil)
         XCTAssert(Set(processor.fetchList.map({$0.owsPrimaryKey})) == processor.downloaded)
         XCTAssert(processor.downloadedOrder == ["B", "A", "C"])
@@ -273,7 +275,7 @@ class OneWaySynchronizerDemoTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: waitTimeout)
         XCTAssert(failed == nil)
         XCTAssert(processor.downloaded.count == 0)
         XCTAssert(processor.removeItemsCalled == 0)
@@ -339,8 +341,8 @@ class OneWaySynchronizerDemoTests: XCTestCase {
         
         service.cancel() // cancel ASAP
         
-        wait(for: [expectation], timeout: 10)
-        wait(for: [startExpectation, endExpectation], timeout: 10)
+        wait(for: [expectation], timeout: waitTimeout)
+        wait(for: [startExpectation, endExpectation], timeout: waitTimeout)
         
         NotificationCenter.default.removeObserver(localObserver)
         
@@ -376,7 +378,7 @@ class OneWaySynchronizerDemoTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: waitTimeout)
         XCTAssert(failed != nil)
         XCTAssert(failed!.count == 1)
         XCTAssert(isFetchError(failed![0], underlying: TestError.error3))
@@ -399,7 +401,7 @@ class OneWaySynchronizerDemoTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: waitTimeout)
         XCTAssert(failed != nil)
         XCTAssert(failed!.count == 1)
         XCTAssert(isDownloadContentError(failed![0], key: "A", underlying: TestError.error1))
@@ -423,7 +425,7 @@ class OneWaySynchronizerDemoTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: waitTimeout)
         XCTAssert(failed != nil)
         XCTAssert(failed!.count == 2)
         XCTAssert(isDownloadContentError(failed![0], key: "A", underlying: TestError.error1))
@@ -448,7 +450,7 @@ class OneWaySynchronizerDemoTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: waitTimeout)
         XCTAssert(failed != nil)
         XCTAssert(failed!.count == 1)
         XCTAssert(isDownloadContentError(failed![0], key: "A", underlying: TestError.error1))
@@ -472,7 +474,7 @@ class OneWaySynchronizerDemoTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: waitTimeout)
         XCTAssert(failed == nil)
         XCTAssert(Set(processor.fetchList.map({$0.owsPrimaryKey})) == processor.downloaded)
         XCTAssert(processor.existingKeys == ["A", "B"])
@@ -498,7 +500,7 @@ class OneWaySynchronizerDemoTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: waitTimeout)
         XCTAssert(failed == nil)
         XCTAssert(Set(processor.fetchList.map({$0.owsPrimaryKey})) == processor.downloaded)
         XCTAssert(processor.existingKeys == ["A", "B"])
@@ -532,7 +534,7 @@ class OneWaySynchronizerDemoTests: XCTestCase {
             expectation2.fulfill()
         }
         
-        wait(for: [expectation1, expectation2], timeout: 10)
+        wait(for: [expectation1, expectation2], timeout: waitTimeout)
         XCTAssert(failed1 == nil)
         XCTAssert(failed2 == nil)
         XCTAssert(Set(processor.fetchList.map({$0.owsPrimaryKey})) == processor.downloaded)
@@ -565,7 +567,7 @@ class OneWaySynchronizerDemoTests: XCTestCase {
                 expectation.fulfill()
             }
             
-            wait(for: [expectation], timeout: 10)
+            wait(for: [expectation], timeout: waitTimeout)
             XCTAssert(failed == nil)
             XCTAssert(Set(processor.fetchList.map({$0.owsPrimaryKey})) == processor.downloaded)
             XCTAssert(processor.existingKeys.count == items.count)
