@@ -30,53 +30,53 @@ For detailed example see [Demo](Demo) folder.
 
 ```
    sync()
-	   ↓
+      ↓
    post OneWaySynchronizerDidChangeSyncStatusNotification
-	   ↓
+      ↓
    [called at the beginning of synchronization process]
    owsSyncBegin
-	   ↓
+      ↓
    [return list of items from remote source, for example, from server]
    owsFetchSourceList
       ↓       ↓
   ┌─< err     ok
   │           ↓
   │ [return unique keys of locally existing items]
-  │	 owsGetLocalKeys 
+  │  owsGetLocalKeys 
   │   ↓       ↓
   ├─< err     ok
   │           ↓
   │ [remove local items, because their keys were not found in source list]
-  │	 owsRemoveLocalItems 
+  │  owsRemoveLocalItems 
   │   ↓       ↓
   ├─< err     ok
   │           ↓
   │ [define if we synchronizer should update already existing item]
-  │	 owsShouldUpdateItem 
+  │  owsShouldUpdateItem 
   │   ↓       ↓
   ├─< err     ok
   │           ↓
   │ [here you can reorder, filter items for next download operations]
-  │	 owsPrepareDownload 
+  │  owsPrepareDownload 
   │   ↓       ↓ 
   ├─< err     ok
   │           ↓
   │ [download preview of item if necessary]
-  │ owsDownloadItemPreview <────────────────────────────┐
+  │  owsDownloadItemPreview <────────────────────────────┐
   │   ↓       ↓                                         │
   ├─< err     ok >── concurrent loop for all previews ──┘
   │           ↓
   │ [download main content of item if necessary]
-  │ owsDownloadItem <──────────────────────────────────┐
+  │  owsDownloadItem <──────────────────────────────────┐
   │   ↓       ↓                                        │
   ├─< err     ok >── concurrent loop for all previews ─┘
   │           ↓
   │  [called after synchronization process]
   └> owsSyncEnd 
-    ↓
-	sync completions
-    ↓ 
-	post OneWaySynchronizerDidChangeSyncStatusNotification
+      ↓
+   sync completions
+      ↓ 
+   post OneWaySynchronizerDidChangeSyncStatusNotification
 
 ```
 
