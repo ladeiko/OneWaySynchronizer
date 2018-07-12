@@ -51,7 +51,7 @@ For detailed example see [Demo](Demo) folder.
   │   ↓       ↓
   ├─< err     ok
   │           ↓
-  │ [define if we synchronizer should update already existing item]
+  │ [define if synchronizer should update already existing item]
   │  owsShouldUpdateItem 
   │   ↓       ↓
   ├─< err     ok
