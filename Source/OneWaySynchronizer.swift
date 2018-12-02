@@ -12,7 +12,7 @@ public typealias OneWaySynchronizerItemKey = String
 public typealias OneWaySynchronizerItemDownloadOrder = Int
 public typealias OwsCompletion = () -> Void
 public typealias OwsSimpleCompletion = (_ error: Error?) -> Void
-public typealias OwsKeysCompletion = (_ error: Error?, _ keys: [OneWaySynchronizerItemKey]) -> Void
+public typealias OwsKeysCompletion = (_ error: Error?, _ keys: [OneWaySynchronizerItemKey]?) -> Void
 public typealias OwsItemsCompletion = (_ error: Error?, _ items: [OneWaySynchronizerItemDescription]?) -> Void
 public typealias OwsBoolCompletion = (_ error: Error?, _ value: Bool?) -> Void
 
@@ -418,7 +418,7 @@ open class OneWaySynchronizer {
                     }
 
                     self.runOnBackground {
-                        context.toRemove = Set(existingKeys)
+                        context.toRemove = Set(existingKeys!)
 
                         for new in newKeys {
                             if context.toRemove.remove(new) != nil {

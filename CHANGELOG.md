@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.1
+### Fixed
+* Change signature of  ```OwsKeysCompletion```: keys now is optional.
+
 ## 1.1.0
 ### Added
 * Add **swiftlint** & **swiftformat** to build phases

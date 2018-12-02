@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "OneWaySynchronizer"
-  s.version      = "1.1.0"
+  s.version      = "1.1.1"
   s.summary      = "OneWaySynchronizer - the simplest way to sync data from remote host into local storage."
 
   s.homepage         = "https://github.com/ladeiko/OneWaySynchronizer"

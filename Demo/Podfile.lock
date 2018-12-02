@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (4.7.2)
-  - OneWaySynchronizer (1.0.0)
+  - OneWaySynchronizer (1.1.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -12,7 +12,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
-  OneWaySynchronizer: c1cdfb67fdc829a998e6afcb0210ca724f24b1d2
+  OneWaySynchronizer: 710c153ea208abb73584170d4d3be6e2f89ea17a
 
 PODFILE CHECKSUM: 6cd346fa0697b77e35547dc18575b1de353ef087
 
